@@ -10,16 +10,14 @@ describe("describeNoteDraft", () => {
       length: 0,
       maxLength: MAX_NOTE_LENGTH,
       tooLong: false,
-      empty: true,
       unsaved: false,
       canSave: false,
     });
   });
 
-  it("treats whitespace alone as empty", () => {
+  it("cannot save whitespace alone", () => {
     const draft = describeNoteDraft("   \n ", null);
 
-    expect(draft.empty).toBe(true);
     expect(draft.canSave).toBe(false);
   });
 

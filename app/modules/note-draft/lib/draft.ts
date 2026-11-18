@@ -4,7 +4,6 @@ export type NoteDraft = {
   length: number;
   maxLength: number;
   tooLong: boolean;
-  empty: boolean;
   unsaved: boolean;
   canSave: boolean;
 };
@@ -25,7 +24,6 @@ export function describeDraft(
     length,
     maxLength: MAX_NOTE_LENGTH,
     tooLong,
-    empty,
     unsaved,
     canSave: unsaved && !empty && !tooLong,
   };
