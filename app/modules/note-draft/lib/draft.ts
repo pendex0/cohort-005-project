@@ -13,11 +13,13 @@ export function describeDraft(
   body: string,
   savedBody: string | null
 ): NoteDraft {
-  const length = body.length;
+  // The save action trims before it stores, so measure and compare what it
+  // will store; otherwise a trailing newline reads as unsaved forever.
+  const stored = body.trim();
+  const length = stored.length;
   const tooLong = length > MAX_NOTE_LENGTH;
-  // The save action rejects a blank Note, so a blank draft is never saveable.
-  const empty = body.trim().length === 0;
-  const unsaved = body !== (savedBody ?? "");
+  const empty = length === 0;
+  const unsaved = stored !== (savedBody ?? "");
 
   return {
     length,

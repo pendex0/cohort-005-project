@@ -68,4 +68,19 @@ describe("describeNoteDraft", () => {
     expect(draft.unsaved).toBe(true);
     expect(draft.canSave).toBe(false);
   });
+
+  it("has nothing to save once the server has trimmed the saved note", () => {
+    const draft = describeNoteDraft("Saved text \n", "Saved text");
+
+    expect(draft.unsaved).toBe(false);
+    expect(draft.canSave).toBe(false);
+  });
+
+  it("counts the length the server will store, without surrounding whitespace", () => {
+    const draft = describeNoteDraft(` ${"a".repeat(MAX_NOTE_LENGTH)} `, null);
+
+    expect(draft.length).toBe(MAX_NOTE_LENGTH);
+    expect(draft.tooLong).toBe(false);
+    expect(draft.canSave).toBe(true);
+  });
 });
