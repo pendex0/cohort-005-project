@@ -1,4 +1,4 @@
-import { runLessonAction } from "./lib/act.server";
+import { runLessonAction } from "./lib/action.server";
 import { loadLessonPage } from "./lib/load.server";
 
 /**

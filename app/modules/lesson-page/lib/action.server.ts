@@ -14,8 +14,12 @@ import { db } from "~/db";
 import { quizzes } from "~/db/schema";
 import { eq } from "drizzle-orm";
 import { parseFormData } from "~/lib/validation";
-import { markLessonComplete } from "./data.server";
-import { lessonRef, INTENT_CAPABILITY } from "./ref.server";
+import { markLessonComplete } from "./queries.server";
+import {
+  type LessonParams,
+  lessonRef,
+  INTENT_CAPABILITY,
+} from "./lesson-ref.server";
 import { getCommentById } from "./thread.server";
 import { computeResult } from "./quiz.server";
 
@@ -47,10 +51,7 @@ const deleteCommentSchema = z.object({
   commentId: z.coerce.number().int(),
 });
 
-export async function runLessonAction(
-  request: Request,
-  params: { slug: string; lessonId: string }
-) {
+export async function runLessonAction(request: Request, params: LessonParams) {
   const formData = await request.formData();
   const intent = formData.get("intent");
 

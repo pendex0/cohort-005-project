@@ -6,7 +6,7 @@ import {
   useNavigate,
 } from "react-router";
 import type { Route } from "./+types/courses.$slug.lessons.$lessonId";
-import { LessonNote } from "~/components/lesson-note";
+import { LessonNote } from "~/components/lesson/lesson-note";
 import { CommentThread } from "~/components/comment-thread";
 import { LessonProgressStatus } from "~/db/schema";
 import { Button } from "~/components/ui/button";

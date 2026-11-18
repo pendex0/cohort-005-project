@@ -17,8 +17,8 @@ import {
   markLessonInProgress,
   getLastWatchPosition,
   calculateWatchProgress,
-} from "./data.server";
-import { lessonRef } from "./ref.server";
+} from "./queries.server";
+import { type LessonParams, lessonRef } from "./lesson-ref.server";
 import { getLessonThread, renderThread } from "./thread.server";
 import {
   getQuizByLessonId,
@@ -54,10 +54,7 @@ function flattenCourseLessons(course: {
   return flat;
 }
 
-export async function loadLessonPage(
-  request: Request,
-  params: { slug: string; lessonId: string }
-) {
+export async function loadLessonPage(request: Request, params: LessonParams) {
   // Not found covers an unknown course, a malformed lesson id, and a lesson
   // from another course.
   const decisions = await coursePermissions.getCourseDecisions(
